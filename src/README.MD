@@ -9,11 +9,9 @@ App Folder: Contains the main file page.tsx, which renders the entire applicatio
 Application Folder: Contains the store.ts, where we configure Redux and create the Redux store.
 Features Folder: Contains the todoSlice.ts which handles the logic for adding/removing todos.
 Components Folder: Contains the UI components like Todo.tsx, AddTodo.tsx, and Main.tsx.
-Step 1: store.ts in Application Folder
-This file is responsible for setting up the Redux store.
+# Step 1: store.ts in Application Folder
+This file is responsible for setting up the Redux store.ts
 
-ts
-Copy code
 import { configureStore } from "@reduxjs/toolkit";
 import todoReducer from "../features/todo/todosSice";
 
