@@ -9,11 +9,11 @@ App Folder: Contains the main file page.tsx, which renders the entire applicatio
 Application Folder: Contains the store.ts, where we configure Redux and create the Redux store.
 Features Folder: Contains the todoSlice.ts which handles the logic for adding/removing todos.
 Components Folder: Contains the UI components like Todo.tsx, AddTodo.tsx, and Main.tsx.
-Step 1: store.ts in Application Folder
-This file is responsible for setting up the Redux store.
+# Step 1: store.ts in Application Folder
+This file is responsible for setting up the Redux store.ts
 
-ts
-Copy code
+## CODE
+
 import { configureStore } from "@reduxjs/toolkit";
 import todoReducer from "../features/todo/todosSice";
 
@@ -25,19 +25,20 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;  // This type gets the entire state structure
 export type AppDispatch = typeof store.dispatch;  // This type gives us the dispatch function
-Explanation:
 
-Redux store: It's like a central storage where all the data (state) is kept. In this case, the state is about todos (tasks).
-configureStore: This is a function from Redux Toolkit that sets up the store for us.
-todos: todoReducer: We are telling Redux that the todos part of the state is managed by the todoReducer (which is in todoSlice.ts).
-RootState and AppDispatch: These types help TypeScript understand the shape of the state and dispatch function in your app, making it safer and easier to work with.
-Real-World Example: Imagine your task manager app has a central file where it keeps track of all your tasks. This is that central file, and it ensures that your app always knows what tasks exist.
 
-Step 2: todoSlice.ts in Features Folder
-This file manages the todo logic — adding and removing tasks.
+## Explanation:
+ Redux store: It's like a central storage where all the data (state) is kept. In this case, the state is about todos (tasks).
+ configureStore: This is a function from Redux Toolkit that sets up the store for us.
+ todos: todoReducer: We are telling Redux that the todos part of the state is managed by the todoReducer (which is in todoSlice.ts).
+ RootState and AppDispatch: These types help TypeScript understand the shape of the state and dispatch function in your app, making it safer and easier to work with.
+### Real-World Example: Imagine your task manager app has a central file where it keeps track of all your tasks. This is that central file, and it ensures that your app always knows what tasks exist.
 
-ts
-Copy code
+# Step 2: todoSlice.ts in Features Folder
+This file manages the todo logic — adding and removing tasks.ts
+
+## CODE
+
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 
 interface Todo {
@@ -73,7 +74,9 @@ export const todoSlice = createSlice({
 export const { addTodo, removeTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
-Explanation:
+
+
+## Explanation:
 
 createSlice: This is a Redux Toolkit function that helps create a "slice" of the Redux state. Here, it’s for todos.
 addTodo: This action is triggered to add a new todo. It gets the todo text from the user and creates a new todo object with a unique ID.
@@ -81,11 +84,11 @@ removeTodo: This action removes a todo by its id.
 State Structure: The TodoState holds an array of todos, where each todo is an object with an id and text.
 Real-World Example: This part is like the brain of your task manager app. Whenever you add a new task, this brain generates a unique task ID (like assigning a task number) and saves it. If you want to remove a task, this brain will find it by its task number and delete it from your list.
 
-Step 3: Todo.tsx in Components Folder
-This file is responsible for displaying the list of todos and allowing you to remove them.
+# Step 3: Todo.tsx in Components Folder
+This file is responsible for displaying the list of todos and allowing you to remove them.tsx
 
-tsx
-Copy code
+## CODE
+
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../application/store"; 
@@ -113,17 +116,19 @@ const Todo: React.FC = () => {
 };
 
 export default Todo;
-Explanation:
 
-useSelector: This is a hook that allows us to get the state from the Redux store. Here, we are getting the list of todos.
-useDispatch: This hook lets us send actions to the Redux store. Here, it dispatches the removeTodo action when the delete button is clicked.
-Real-World Example: This part is like your task manager showing the list of tasks you need to do. Each task has a "Delete" button, and when you press it, the task gets removed from your list.
 
-Step 4: AddTodo.tsx in Components Folder
-This file allows the user to add new todos.
+## Explanation:
 
-tsx
-Copy code
+ useSelector: This is a hook that allows us to get the state from the Redux store. Here, we are getting the list of todos.
+ useDispatch: This hook lets us send actions to the Redux store. Here, it dispatches the removeTodo action when the delete button is clicked.
+ Real-World Example: This part is like your task manager showing the list of tasks you need to do. Each task has a "Delete" button, and when you press it, the task gets removed from your list.
+
+# Step 4: AddTodo.tsx in Components Folder
+This file allows the user to add new todos.tsx
+
+## CODE
+
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../features/todo/todosSice';
@@ -151,17 +156,18 @@ const AddTodo: React.FC = () => {
 };
 
 export default AddTodo;
-Explanation:
 
-useState: We use this to keep track of the current value the user is typing into the input field.
-addTodoHandler: When the user submits the form, this function is triggered. It dispatches the addTodo action to add the new todo to the list.
-Real-World Example: This is like you entering a new task into your task manager. You type the task into the input field and press "Add Todo," and the task gets added to your task list.
+## Explanation:
 
-Step 5: Main.tsx in Components Folder
-This file renders the entire app, including the form to add todos and the list of todos.
+ useState: We use this to keep track of the current value the user is typing into the input field.
+ addTodoHandler: When the user submits the form, this function is triggered. It dispatches the addTodo action to add the new todo to the list.
+ Real-World Example: This is like you entering a new task into your task manager. You type the task into the input field and press "Add Todo," and the task gets added to your task list.
 
-tsx
-Copy code
+# Step 5: Main.tsx in Components Folder
+This file renders the entire app, including the form to add todos and the list of todos.tsx
+
+## CODE
+
 import React from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
@@ -179,13 +185,14 @@ const Main: React.FC = () => {
 };
 
 export default Main;
-Explanation:
 
-Provider: This component makes the Redux store available to all components in the app.
-Rendering AddTodo and Todo: This is where we bring the functionality together. First, you can add new todos with AddTodo, and then view/remove them with Todo.
-Real-World Example: This is like the main screen of your task manager, where you can both add new tasks and view/remove the existing ones.
+## Explanation:
 
-Conclusion
+ Provider: This component makes the Redux store available to all components in the app.
+ Rendering AddTodo and Todo: This is where we bring the functionality together. First, you can add new todos with AddTodo, and then view/remove them with Todo.
+ Real-World Example: This is like the main screen of your task manager, where you can both add new tasks and view/remove the existing ones.
+
+### Conclusion
 This is a basic Todo app using Redux Toolkit to manage state. You have:
 
 A global store that holds the todos.
@@ -193,7 +200,7 @@ A slice that defines how to modify the todos (add or remove).
 Components like AddTodo and Todo to interact with the user.
 With this approach, all your todos are stored centrally in the Redux store, and you can easily add or remove them from any component in the app.
 
-To sum up:
+## To sum up:
 Redux acts as the central task manager, handling the state (your tasks).
 React lets you interact with this state (like adding/removing tasks) through components.
 This structure can be expanded as you learn more, adding features like editing tasks, persisting data to a backend, or even filtering tasks. Let me know if you'd like further explanations or assistance with any part of it!
